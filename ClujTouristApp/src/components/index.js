@@ -1,17 +1,14 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
-import './assets/css/main.css'
+import '../assets/css/main.css'
 import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
-import Login from './components/Login'
-import Register from './components/Register'
-import Home from './components/Home'
-import Add from './components/Add'
-import Dashboard from './components/protected/Dashboard'
-import { logout } from './helpers/auth'
-import { firebaseAuth } from './config/constants'
+import Login from './Login'
+import Register from './Register'
+import Home from './Home'
+import Add from './Add'
+import Dashboard from './protected/Dashboard'
+import { logout } from '../helpers/auth'
+import { firebaseAuth } from '../config/constants'
 
 function PrivateRoute ({component: Component, authed, ...rest}) {
   return (
