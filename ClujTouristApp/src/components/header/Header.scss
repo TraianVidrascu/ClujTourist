@@ -1,12 +1,12 @@
 @media (min-width: 768px) {
-  .footer-container {
+  .header-container {
     background-color: plum;
     text-align: center;
     vertical-align: middle;
     margin-top: 3px;
   }
 
-  .footer-info {
+  .header-message {
     height: 100%;
 
     p {
@@ -28,7 +28,7 @@
 }
 
 @media (max-width: 767px) {
-  .footer-container {
+  .header-container {
     display: none;
   }
 

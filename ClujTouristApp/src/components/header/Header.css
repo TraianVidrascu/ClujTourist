@@ -1,34 +1,35 @@
 @media (min-width: 768px) {
-    .footer-container {
+    .header-container {
         background-color: lightgrey;
         text-align: center;
         vertical-align: middle;
         margin-top: 3px;
     }
 
-    .footer-info {
+    .header-message {
         height: 100%;
     }
 
-    .footer-info p {
-        font-size: small;
+    .header-message p {
+        font-size: medium;
         color: black;
+        font-weight: bold;
         margin: 0px;
     }
 
-    .footer-info a {
+    .header-message a {
         font-size: small;
         color: black;
     }
 
-    .footer-info a:hover {
+    .header-message a:hover {
         color: #ffec00;
         text-decoration: none;
     }
 }
 
 @media (max-width: 767px) {
-    .footer-container {
+    .header-container {
         display: none;
     }
 }
