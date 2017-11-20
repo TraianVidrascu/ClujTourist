@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import firebase from '../config/constants'
+import {Link} from "react-router-dom";
+
 
 export default class Home extends Component {
     constructor() {
@@ -55,11 +57,14 @@ export default class Home extends Component {
                                         <button type="submit" className="glyphicon glyphicon-remove"
                                                 onClick={(e) => this.deleteRow(item.id, e)}
                                         ></button>
-                                        <button type="submit" className="glyphicon glyphicon-edit"></button>
+                                        <Link to={'/objectives/'+ item.id}>
+                                            <button type="submit" className="glyphicon glyphicon-edit"><span className="glyphicon glyphicon-info-sign"/></button>
+                                        </Link>
+
                                     </div>
                                     <a href="#" className="list-group-item list-group-item-action">
                                         <img src={item.profile_image} width="100px" height="100px"/>
-                                        <span>    Name: {item.name}</span>
+                                        <span>    Name: {item.name} </span>
                                         <span>Description: {item.description}</span>
 
                                     </a>

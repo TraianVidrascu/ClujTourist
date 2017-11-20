@@ -8,10 +8,11 @@ import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
 import Login from './components/Login'
 import Register from './components/Register'
 import Home from './components/Home'
-import Add from './components/Add'
+import Add from './components/objectives/Add'
 import Dashboard from './components/protected/Dashboard'
 import { logout } from './helpers/auth'
 import { firebaseAuth } from './config/constants'
+import EditObjective from "./components/objectives/EditObjective";
 
 function PrivateRoute ({component: Component, authed, ...rest}) {
   return (
@@ -99,6 +100,7 @@ export default class App extends Component {
                 <PublicRoute authed={this.state.authed} path='/register' component={Register} />
                 <PublicRoute authed={this.state.authed} path='/add' component={Add} />
                 <PrivateRoute authed={this.state.authed} path='/dashboard' component={Dashboard} />
+                <PrivateRoute authed={this.state.authed} path='/objectives/:id' component={EditObjective} />
                 <Route render={() => <h3>No Match</h3>} />
               </Switch>
             </div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import firebase from '../config/constants'
+import firebase from '../../config/constants'
 export default class Add extends Component {
     constructor() {
         super();
