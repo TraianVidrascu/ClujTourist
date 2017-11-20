@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import firebase from '../config/constants'
 
 export default class Home extends Component {
@@ -8,6 +8,7 @@ export default class Home extends Component {
             items: []
         }
     }
+
     componentDidMount() {
         const itemsRef = firebase.database().ref('items');
         itemsRef.on('value', (snapshot) => {
@@ -16,9 +17,13 @@ export default class Home extends Component {
             for (let item in items) {
                 newState.push({
                     id: item,
-                    title: items[item].title,
+                    name: items[item].name,
                     description: items[item].description,
-                    image: items[item].image
+                    location: items[item].location,
+                    address: items[item].address,
+                    tag_string: items[item].tag_string,
+                    note: items[item].note,
+                    profile_image: items[item].profile_image
                 });
             }
             this.setState({
@@ -26,23 +31,46 @@ export default class Home extends Component {
             });
         });
     }
-    render () {
+
+    deleteRow = (item,e) => {
+        e.preventDefault();
+
+        var items = this.state.items.filter(function(itm) {
+            return item !== itm.id;
+        })
+        this.setState({ items: items });
+
+        firebase.database().ref('items').child(item).remove();
+    }
+
+    render() {
         return (
-                <div className="container">
-                    <div className="row justify-content-md-center">
-                        <div className="list-group">
-                            {this.state.items.map((item) => {
-                              return (
-                                <a href="#" className="list-group-item list-group-item-action">
-                                    <img src={item.image} width="100px" height="100px"/>
-                                    <span>Description: {item.description}</span>
-                                    <span>---- Title: {item.title}</span>
-                                </a>
-                              )
-                            })}
-                        </div>
+            <div className="container">
+                <div className="row justify-content-md-center">
+                    <div className="list-group">
+                        {this.state.items.map((item) => {
+                            return (
+                                <div>
+                                    <div className="list-group-item list-group-item-action">
+                                        <button type="submit" className="glyphicon glyphicon-remove"
+                                                onClick={(e) => this.deleteRow(item.id, e)}
+                                        ></button>
+                                        <button type="submit" className="glyphicon glyphicon-edit"></button>
+                                    </div>
+                                    <a href="#" className="list-group-item list-group-item-action">
+                                        <img src={item.profile_image} width="100px" height="100px"/>
+                                        <span>    Name: {item.name}</span>
+                                        <span>Description: {item.description}</span>
+
+                                    </a>
+
+                                </div>
+
+                            )
+                        })}
                     </div>
                 </div>
+            </div>
         )
     }
 }
