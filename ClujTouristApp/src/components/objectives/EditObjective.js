@@ -19,13 +19,15 @@ export default class EditObjective extends Component {
             profile_image: '',// web link catre imagine
             start_date: '',
             end_date: '',
-        }
+        };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
-        this.state.key = this.props.match.params.id;
+        this.setState({
+            key: this.props.match.params.id,
+        });
         this.state.itemRef.once('value')
             .then((snapshot) => {
                     let item = snapshot.val();

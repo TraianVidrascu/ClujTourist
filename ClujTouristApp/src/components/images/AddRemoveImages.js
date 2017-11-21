@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import DropzoneComponent from 'react-dropzone-component';
-import firebase from '../../config/constants'
 import * as ReactDOMServer from "react-dom/lib/ReactDOMServer";
 
-var componentConfig = {
+const componentConfig = {
     iconFiletypes: ['.jpg', '.png', '.gif'],
     showFiletypeIcon: true,
-    postUrl: '/uploadHandler'
+    postUrl: '/uploadHandler',
 };
-var djsConfig = {
+
+const djsConfig = {
     previewTemplate: ReactDOMServer.renderToStaticMarkup(
         <div className="dz-preview dz-file-preview">
             <div className="dz-details">
                 <div className="dz-filename"><span data-dz-name="true"></span></div>
-                <img data-dz-thumbnail="true" />
+                <img data-dz-thumbnail="true" alt="Unavailable"/>
             </div>
             <div className="dz-progress"><span className="dz-upload" data-dz-uploadprogress="true"></span></div>
             <div className="dz-success-mark"><span>✔</span></div>
@@ -22,26 +21,23 @@ var djsConfig = {
             <div className="dz-error-message"><span data-dz-errormessage="true"></span></div>
         </div>
     )
-}
-
-var componentConfig = {
-    postUrl: '/uploadHandler'
 };
 
-var eventHandlers = {
+
+const eventHandlers = {
     // This one receives the dropzone object as the first parameter
     // and can be used to additional work with the dropzone.js
     // object
     init: null,
     // All of these receive the event as first parameter:
-    drop: callbackArray,
+    drop: null,
     dragstart: null,
     dragend: null,
     dragenter: null,
     dragover: null,
     dragleave: null,
     // All of these receive the file as first parameter:
-    addedfile: simpleCallBack,
+    addedfile: null,
     removedfile: null,
     thumbnail: null,
     error: null,
@@ -65,9 +61,9 @@ var eventHandlers = {
     totaluploadprogress: null,
     reset: null,
     queuecomplete: null
-}
+};
 
-var callbackArray = [
+const callbackArray = [
     function () {
         console.log('Look Ma, I\'m a callback in an array!');
     },
@@ -76,7 +72,7 @@ var callbackArray = [
     }
 ];
 
-var simpleCallBack = function () {
+const simpleCallBack = function () {
     console.log('I\'m a simple callback');
 };
 
@@ -90,7 +86,9 @@ export default class AddRemoveImages extends Component {
 
     componentDidMount(){
         this.setState({
-            key: this.props.id
+            key: this.props.id,
+            addedfile: simpleCallBack,
+            drop: callbackArray,
         })
     }
 

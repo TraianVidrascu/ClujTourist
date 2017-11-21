@@ -72,7 +72,9 @@ export default class Add extends Component {
     }
 
     handleMenuChange(e) {
-        this.state.showButton = !this.state.showButton;
+        this.setState({
+            showButton: !this.state.showButton,
+        });
         if (this.state.showButton === true) {
             this.setState({
                 showButtonText: 'Location Menu Add',
