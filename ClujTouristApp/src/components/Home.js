@@ -65,7 +65,8 @@ export default class Home extends Component {
                                     <a href="#" className="list-group-item list-group-item-action">
                                         <img src={item.profile_image} width="100px" height="100px"/>
                                         <span>    Name: {item.name} </span>
-                                        <span>Description: {item.description}</span>
+                                        <span>Description: {item.description} </span>
+                                        <span>Tags: {item.tag_string}</span>
 
                                     </a>
 

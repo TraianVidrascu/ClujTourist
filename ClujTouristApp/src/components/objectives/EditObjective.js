@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import firebase from '../../config/constants'
 import {NotificationContainer, NotificationManager} from 'react-notifications';
+import AddRemoveImages from "../images/AddRemoveImages";
 
 export default class EditObjective extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            key: this.props.match.params.id,
             itemRef: firebase.database().ref('items').child(this.props.match.params.id),
             item: '',
             name: '',
@@ -99,7 +101,7 @@ export default class EditObjective extends Component {
                 </div>
                 <button type="submit" className="btn btn-primary">Save changes</button>
             </form>
-
+            <AddRemoveImages id={this.state.key}/>
         </div>)
     }
 }
