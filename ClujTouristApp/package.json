@@ -9,6 +9,11 @@
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+<<<<<<< HEAD
+=======
+    "react-dropzone-es6": "^1.0.2",
+    "react-notifications": "^1.4.3",
+>>>>>>> crud events
     "react-router-dom": "^4.1.1"
   },
   "scripts": {
