@@ -65,6 +65,7 @@ export default class Home extends Component {
     renderSearch() {
         const { search } = this.state
 
+<<<<<<< HEAD
         return (
             <input
                 type="text"
@@ -78,6 +79,14 @@ export default class Home extends Component {
     }
     renderFilter() {
         const { filter } = this.state
+=======
+                                    </div>
+                                    <a href="#" className="list-group-item list-group-item-action">
+                                        <img src={item.profile_image} alt="Unavailable" width="100px" height="100px"/>
+                                        <span>    Name: {item.name} </span>
+                                        <span>Description: {item.description} </span>
+                                        <span>Tags: {item.tag_string}</span>
+>>>>>>> + added dependencies to package.json
 
         return (
             <div className="btn-group" style={{ marginBottom: 20 }}>

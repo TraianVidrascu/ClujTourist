@@ -8,19 +8,22 @@ function setErrorMsg(error) {
 }
 
 export default class Login extends Component {
-  state = { loginMessage: null }
+  state = { loginMessage: null };
+
   handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     login(this.email.value, this.pw.value)
       .catch((error) => {
           this.setState(setErrorMsg('Invalid username/password.'))
         })
-  }
+  };
+
   resetPassword = () => {
     resetPassword(this.email.value)
       .then(() => this.setState(setErrorMsg(`Password reset email sent to ${this.email.value}.`)))
       .catch((error) => this.setState(setErrorMsg(`Email address not found.`)))
-  }
+  };
+
   render () {
     return (
       <div className="col-sm-6 col-sm-offset-3">
