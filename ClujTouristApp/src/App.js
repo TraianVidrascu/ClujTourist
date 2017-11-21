@@ -35,6 +35,21 @@ function PublicRoute ({component: Component, authed, ...rest}) {
   )
 }
 
+const renderMergedProps = (component, ...rest) => {
+    const finalProps = Object.assign({}, ...rest);
+    return (
+        React.createElement(component, finalProps)
+    );
+};
+
+const PropsRoute = ({ component, ...rest }) => {
+    return (
+        <Route {...rest} render={routeProps => {
+            return renderMergedProps(component, routeProps, rest);
+        }}/>
+    );
+};
+
 export default class App extends Component {
   state = {
     authed: false,
@@ -94,7 +109,8 @@ export default class App extends Component {
           <div className="container">
             <div className="row">
               <Switch>
-                <Route path='/' exact component={Home} />
+                {/*<Route path='/' exact component={Home} />*/}
+                <PropsRoute path='/' exact component={Home} authed={this.state.authed} />
                 <PublicRoute authed={this.state.authed} path='/login' component={Login} />
                 <PublicRoute authed={this.state.authed} path='/register' component={Register} />
                 <PublicRoute authed={this.state.authed} path='/add' component={Add} />
