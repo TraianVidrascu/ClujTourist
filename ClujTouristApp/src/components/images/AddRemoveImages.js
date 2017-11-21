@@ -14,10 +14,14 @@ const djsConfig = {
             <div className="dz-details">
                 <div className="dz-filename"><span data-dz-name="true"></span></div>
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <img data-dz-thumbnail="true" alt="Unavailable image"/>
 =======
                 <img data-dz-thumbnail="true" alt="Unavailable"/>
 >>>>>>> + added dependencies to package.json
+=======
+                <img data-dz-thumbnail="true" alt="Unavailable image"/>
+>>>>>>> * disabled view for remove/ edit btn in Home page
             </div>
             <div className="dz-progress"><span className="dz-upload" data-dz-uploadprogress="true"></span></div>
             <div className="dz-success-mark"><span>✔</span></div>
