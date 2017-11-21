@@ -196,8 +196,7 @@ export default class Home extends Component {
                                         </div>
 
                                         <a href="#" className="list-group-item list-group-item-action">
-                                            <img src={item.profile_image} alt="Unavailable image" width="100px"
-                                                 height="100px"/>
+                                            <img src={item.profile_image} alt="Unavailable" width="100px" height="100px"/>
                                             <span>    Name: {item.name} </span>
                                             <span>Description: {item.description} </span>
                                             <span>Tags: {item.tag_string}</span>
@@ -235,7 +234,7 @@ export default class Home extends Component {
 
                                         </div>
                                         <a href="#" className="list-group-item list-group-item-action">
-                                            <img src={item.profile_image} alt="Unavailable image" width="100px"
+                                            <img src={item.profile_image} alt="Unavailable" width="100px"
                                                  height="100px"/>
                                             <span>    Name: {item.name} </span>
                                             <span>Description: {item.description} </span>
