@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import firebase from '../config/constants'
 import {Link} from "react-router-dom";
 
-
 export default class Home extends Component {
     constructor() {
         super();

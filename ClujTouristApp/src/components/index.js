@@ -7,6 +7,7 @@ import Register from './Register'
 import Home from './Home'
 import Add from './objectives/Add'
 import Dashboard from './protected/Dashboard'
+import Map from './map/Map'
 import { logout } from '../helpers/auth'
 import { firebaseAuth } from '../config/constants'
 
@@ -69,6 +70,9 @@ export default class App extends Component {
                   <Link to="/" className="navbar-brand">Home</Link>
                 </li>
                 <li>
+                  <Link to="/map" className="navbar-brand">Map</Link>
+                </li>
+                <li>
                   <Link to="/dashboard" className="navbar-brand">Dashboard</Link>
                 </li>
                 <li>
@@ -92,6 +96,7 @@ export default class App extends Component {
             <div className="row">
               <Switch>
                 <Route path='/' exact component={Home} />
+                <PublicRoute authed={this.state.authed} path='/map' component={Map} />
                 <PublicRoute authed={this.state.authed} path='/login' component={Login} />
                 <PublicRoute authed={this.state.authed} path='/register' component={Register} />
                 <PublicRoute authed={this.state.authed} path='/add' component={Add} />
