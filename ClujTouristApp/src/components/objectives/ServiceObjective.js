@@ -1,19 +1,22 @@
 import React, {Component} from 'react';
 import firebase from '../../config/constants';
 
-export default class ServiceObjective extends Component {
-    constructor() {
-    }
+var ServiceObjective = React.createClass( {    
+    getFirebaseRef: function(i) {
+        return {
+            result: firebase.database().ref(i)
+        }
+    },
+   
+    getFirebaseChild: function(i,c) {
+        return {
+            result: firebase.database().ref(i).child(c)
+        }
+    },
     
-    getFirebaseRef(item) {
-        firebase.database().ref(item);
-    }
-
-    getFirebaseChild(item, child) {
-        firebase.database().ref(item).child(child);
-    }
-
-    removeFirebaseChild(item, child) {
-        firebase.database().ref(item).child(child).remove();
-    }
-}
+    removeFirebaseChild: function(i,c) {
+         firebase.database().ref(i).child(c).remove();
+    },
+    
+    render: function() {}
+});
