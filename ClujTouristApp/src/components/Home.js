@@ -3,12 +3,8 @@ import firebase from '../config/constants'
 import {Link} from "react-router-dom";
 import '../assets/css/main.css'
 import 'bootstrap/dist/css/bootstrap.css'
-
-<<<<<<< HEAD
-=======
 import 'jquery'
 
->>>>>>> timar_dev
 export default class Home extends Component {
     constructor() {
         super();
@@ -135,7 +131,6 @@ export default class Home extends Component {
                         <div className="list-group" className={this.state.shouldHide ? 'hidden' : ''}>
                             {this.state.items.map((item, index) => {
                                 return (
-
                                     <div key={index} className="col-xs-12 col-sm-6 col-md-6">
                                         <div className="well well-sm">
                                             <div className="row">
