@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Link} from "react-router-dom";
-import ServiceObjective from './objectives/ServiceObjective';
+import ServiceObjective from './ServiceObjective';
 import '../assets/css/main.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'jquery'
@@ -30,7 +30,7 @@ export default class Home extends Component {
                 shouldHide: true
             });
             let key = this.state.searchKey
-            const itemsRef = ServiceObjective.getFirebaseRef('items');
+            const itemsRef = firebase.database().ref('items');
             itemsRef.on('value', (snapshot) => {
                 let items = snapshot.val();
                 let newState = [];
