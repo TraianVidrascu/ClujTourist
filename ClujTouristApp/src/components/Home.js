@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
-import firebase from '../config/constants'
 import {Link} from "react-router-dom";
-
+import ServiceObjective from './ServiceObjective';
 
 export default class Home extends Component {
     constructor() {
@@ -12,7 +11,7 @@ export default class Home extends Component {
     }
 
     componentDidMount() {
-        const itemsRef = firebase.database().ref('items');
+        const itemsRef = ServiceObjective.getFirebaseRef('items');
         itemsRef.on('value', (snapshot) => {
             let items = snapshot.val();
             let newState = [];
@@ -42,7 +41,7 @@ export default class Home extends Component {
         });
         this.setState({ items: items });
 
-        firebase.database().ref('items').child(item).remove();
+        ServiceObjective.removeFirebaseChild('items', item);
     };
 
     render() {
