@@ -9,6 +9,7 @@ import Register from './components/Register'
 import Home from './components/Home'
 import Add from './components/objectives/Add'
 import Dashboard from './components/protected/Dashboard'
+import Map from './components/Map'
 import { logout } from './helpers/auth'
 import { firebaseAuth } from './config/constants'
 import EditObjective from "./components/objectives/EditObjective";
@@ -20,6 +21,17 @@ function PrivateRoute ({component: Component, authed, ...rest}) {
       render={(props) => authed === true
         ? <Component {...props} />
         : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
+    />
+  )
+}
+
+function PublicRoute ({component: Component, authed, ...rest}) {
+  return (
+    <Route
+      {...rest}
+      render={(props) => authed === false
+        ? <Component {...props} />
+        : <Redirect to='/map' />}
     />
   )
 }
@@ -87,6 +99,9 @@ export default class App extends Component {
                   <Link to="/" className="navbar-brand">Home</Link>
                 </li>
                 <li>
+                  <Link to="/map" className="navbar-brand">Map</Link>
+                </li>
+                <li>
                   <Link to="/dashboard" className="navbar-brand">Dashboard</Link>
                 </li>
                 <li>
@@ -111,6 +126,7 @@ export default class App extends Component {
               <Switch>
                 {/*<Route path='/' exact component={Home} />*/}
                 <PropsRoute path='/' exact component={Home} authed={this.state.authed} />
+                <PublicRoute authed={this.state.authed} path='/map' exact component={Map} />
                 <PublicRoute authed={this.state.authed} path='/login' component={Login} />
                 <PublicRoute authed={this.state.authed} path='/register' component={Register} />
                 <PublicRoute authed={this.state.authed} path='/add' component={Add} />
