@@ -16,9 +16,9 @@
     display:inline;
     margin-right:3px;
 }
-a{
+button a{
     color:white !important;
 }
-a:hover{
+button a:hover{
     color:white !important;
 }
