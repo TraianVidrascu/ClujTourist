@@ -2,13 +2,14 @@ import React, {Component} from 'react';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import AddRemoveImages from "../images/AddRemoveImages";
 import ServiceObjective from './ServiceObjective';
+import firebase from '../../config/constants';
 
 export default class EditObjective extends Component {
     constructor(props) {
         super(props);
         this.state = {
             key: this.props.match.params.id,
-            itemRef: ServiceObjective.getFirebaseChild('items',this.props.match.params.id),
+            itemRef: firebase.database().ref('items').child(this.props.match.params.id),
             item: '',
             name: '',
             description: '',

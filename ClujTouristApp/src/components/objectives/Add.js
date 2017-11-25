@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ServiceObjective from './ServiceObjective';
+import firebase from '../../config/constants';
 
 export default class Add extends Component {
     constructor() {
@@ -31,7 +32,7 @@ export default class Add extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        const itemsRef = ServiceObjective.getFirebaseRef('items');
+        const itemsRef = firebase.database().ref('items');
         var item;
         if (this.state.baseTag.trim() === '#location'.trim()) {
              item = {

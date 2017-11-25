@@ -4,6 +4,7 @@ import ServiceObjective from './objectives/ServiceObjective';
 import '../assets/css/main.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'jquery'
+import firebase from '../config/constants'
 
 export default class Home extends Component {
     constructor() {
@@ -30,7 +31,7 @@ export default class Home extends Component {
                 shouldHide: true
             });
             let key = this.state.searchKey
-            const itemsRef = ServiceObjective.getFirebaseRef('items');
+            const itemsRef = firebase.database().ref('items');
             itemsRef.on('value', (snapshot) => {
                 let items = snapshot.val();
                 let newState = [];
@@ -55,7 +56,7 @@ export default class Home extends Component {
         }
      }
     componentDidMount() {
-        const itemsRef = ServiceObjective.getFirebaseRef('items');
+        const itemsRef = firebase.database().ref('items');
         itemsRef.on('value', (snapshot) => {
             let items = snapshot.val();
             let newState = [];
@@ -85,7 +86,7 @@ export default class Home extends Component {
         });
         this.setState({ items: items });
 
-        ServiceObjective.removeFirebaseChild('items', item);
+        firebase.database().ref('items').child(item);
     };
     formPreventDefault(e) {
         e.preventDefault();
