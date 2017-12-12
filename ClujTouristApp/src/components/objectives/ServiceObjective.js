@@ -17,6 +17,8 @@ var ServiceObjective = React.createClass( {
     removeFirebaseChild: function(i,c) {
          firebase.database().ref(i).child(c).remove();
     },
+
+
     
     render: function() {}
 });

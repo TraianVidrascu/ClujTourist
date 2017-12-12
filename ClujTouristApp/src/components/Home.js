@@ -42,7 +42,7 @@ export default class Home extends Component {
         this.setState({ items: newItems });
 
         // stergerea nu se face pe firebase
-        // firebase.database().ref('items').child(item);
+        ServiceObjective.removeFirebaseChild('items',id);
     }
     filterItems() {
         const { search, filter, items } = this.state

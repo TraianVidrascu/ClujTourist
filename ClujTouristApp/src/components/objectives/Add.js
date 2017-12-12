@@ -78,13 +78,13 @@ export default class Add extends Component {
         });
         if (this.state.showButton === true) {
             this.setState({
-                showButtonText: 'Location Menu Add',
-                baseTag: '#event'
+                showButtonText: 'Event Menu Add',
+                baseTag: '#location'
             })
         } else {
             this.setState({
-                showButtonText: 'Event Menu Add',
-                baseTag: '#location'
+                showButtonText: 'Location Menu Add',
+                baseTag: '#event'
             })
         }
         console.log(this.state.showButton)

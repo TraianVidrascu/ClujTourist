@@ -8,6 +8,7 @@ export default class EditObjective extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            img:undefined,
             key: this.props.match.params.id,
             itemRef: firebase.database().ref('items').child(this.props.match.params.id),
             item: '',
@@ -53,6 +54,8 @@ export default class EditObjective extends Component {
                         item.start_date,
                         end_date:
                         item.end_date,
+                        image:
+                        item.profile_image
                     })
                 }
             )
@@ -97,6 +100,7 @@ export default class EditObjective extends Component {
         return (<div className="row">
             <NotificationContainer className="alert alert-success"/>
             <h1>Edit {this.state.name}</h1>
+            <image src={this.state.image}></image>
             <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
                     <label>Name</label>
