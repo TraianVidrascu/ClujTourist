@@ -100,7 +100,7 @@ export default class EditObjective extends Component {
         return (<div className="row">
             <NotificationContainer className="alert alert-success"/>
             <h1>Edit {this.state.name}</h1>
-            <image src={this.state.image}></image>
+            <img src={this.state.image} alt="" className="img-rounded img-responsive" />
             <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
                     <label>Name</label>
