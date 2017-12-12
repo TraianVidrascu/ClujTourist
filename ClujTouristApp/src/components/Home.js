@@ -5,6 +5,8 @@ import ServiceObjective from './objectives/ServiceObjective';
 import '../assets/css/main.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'jquery'
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+
 import firebase from '../config/constants'
 
 export default class Home extends Component {
@@ -43,7 +45,9 @@ export default class Home extends Component {
         this.setState({ items: newItems });
 
         // stergerea nu se face pe firebase
-        ServiceObjective.removeFirebaseChild('items',id);
+        firebase.database().ref('items').child(id).remove();
+        NotificationManager.success('Deletion completed', 'Success');
+
     }
     filterItems() {
         const { search, filter, items } = this.state
@@ -108,6 +112,7 @@ export default class Home extends Component {
             <div className="row justify-content-md-center">
                 {items.map(item => (
                     <div key={item.id} className="col-xs-12 col-sm-6 col-md-6">
+                        <NotificationContainer className="alert alert-success"/>
                         <div className="well well-sm">
                             <div className="row">
                                 <div className="col-sm-6 col-md-4">

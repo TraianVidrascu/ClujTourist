@@ -3,6 +3,7 @@ import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.css'
 import './assets/css/main.css'
+import 'react-notifications/lib/notifications.css'
 import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
 import Login from './components/Login'
 import Register from './components/Register'
