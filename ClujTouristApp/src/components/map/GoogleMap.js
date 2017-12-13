@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import GoogleMapReact from 'google-map-react';
 import MapDisplayObject from "./MapDisplayObject";
 import firebase from '../../config/constants'
+import 'bootstrap/dist/css/bootstrap.css'
 
 const a = ({text}) => <div>{text}</div>;
 
@@ -14,7 +15,7 @@ class GoogleMap extends Component {
         }
         this._getLat = this._getLat.bind(this);
         this._getLng = this._getLng.bind(this);
-
+        this._getStyle = this._getStyle.bind(this);
     }
 
     componentDidMount() {
@@ -31,22 +32,42 @@ class GoogleMap extends Component {
         })
     }
 
-    _getLat(coor){
-        var lat =  coor.split(' ')[0].replace('.','').replace('\'','').replace('°','.');
-        return lat.substring(0,lat.length-2)
+    _getLat(coor) {
+        return coor.split(',')[0]
     }
 
-    _getLng(coor){
-        var lng =  coor.split(' ')[1].replace('.','').replace('\'','').replace('°','.');
-        return lng.substring(0,lng.length-3)
+    _getLng(coor) {
+        return coor.split(',')[1]
     }
 
+    _getStyle(tag_string) {
+        const event = {
+
+            width: '49px',
+            height: '64px',
+            color: 'red'
+        }
+        const location = {
+
+            width: '49px',
+            height: '64px',
+            color: 'blue'
+        }
+        if(tag_string.indexOf('location')>=0){
+            return location;
+        }else{
+            return event;
+        }
+    }
     render() {
+
+
         const objectives = this.state.items.map((item, index) => (
             <MapDisplayObject
                 text={item.name}
                 lat={this._getLat(item.location)}
                 lng={this._getLng(item.location)}
+                style={this._getStyle(item.tag_string)}
             />
         ));
 
@@ -69,6 +90,8 @@ class GoogleMap extends Component {
                 </GoogleMapReact>)
 
     }
+
+
 }
 
 GoogleMap.defaultProps = {
