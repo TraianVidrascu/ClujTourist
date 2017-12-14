@@ -14,6 +14,7 @@ import Map from './components/Map'
 import { logout } from './helpers/auth'
 import { firebaseAuth } from './config/constants'
 import EditObjective from "./components/objectives/EditObjective";
+import ObjectiveDP from "./components/ObjectiveDetailPage";
 
 function PrivateRoute ({component: Component, authed, ...rest}) {
   return (
@@ -133,6 +134,7 @@ export default class App extends Component {
                 <PublicRoute authed={this.state.authed} path='/add' component={Add} />
                 <PrivateRoute authed={this.state.authed} path='/dashboard' component={Dashboard} />
                 <PrivateRoute authed={this.state.authed} path='/objectives/:id' component={EditObjective} />
+                <PublicRoute authed={this.state.authed} path='/objective/:id' component={ObjectiveDP} />
                 <Route render={() => <h3>No Match</h3>} />
               </Switch>
             </div>

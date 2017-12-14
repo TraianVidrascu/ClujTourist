@@ -123,7 +123,7 @@ export default class Home extends Component {
                                     <p>{item.description.slice(0, 95)} ... </p>
                                     {authed === false ? (
                                         <div className="btn-group">
-                                            <Link to={'/objectives/' + item.id}>
+                                            <Link to={'/objective/' + item.id}>
                                                 <button className="btn btn-primary">
                                                     <span className="glyphicon glyphicon-info-sign" /> Info
                                                     </button>
