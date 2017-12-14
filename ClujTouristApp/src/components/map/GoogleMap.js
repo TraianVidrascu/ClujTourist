@@ -41,17 +41,40 @@ class GoogleMap extends Component {
     }
 
     _getStyle(tag_string) {
-        const event = {
+        const K_WIDTH = 40;
+        const K_HEIGHT = 40;
 
-            width: '49px',
-            height: '64px',
-            color: 'red'
+        const event = {
+            position: 'absolute',
+            width: K_WIDTH,
+            height: K_HEIGHT,
+            left: -K_WIDTH / 2,
+            top: -K_HEIGHT / 2,
+
+            border: '5px solid #f44336',
+            borderRadius: K_HEIGHT,
+            textAlign: 'center',
+            backgroundColor: '#3f51b5',
+            fontSize: 16,
+            fontWeight: 'bold',
+            padding: 4,
         }
         const location = {
 
-            width: '49px',
-            height: '64px',
-            color: 'blue'
+            position: 'absolute',
+            width: K_WIDTH,
+            height: K_HEIGHT,
+            left: -K_WIDTH / 2,
+            top: -K_HEIGHT / 2,
+
+            border: '5px solid #f44336',
+            borderRadius: K_HEIGHT,
+            backgroundColor: '#FFFF00',
+            textAlign: 'center',
+            color: '#3f51b5',
+            fontSize: 16,
+            fontWeight: 'bold',
+            padding: 4,
         }
         if(tag_string.indexOf('location')>=0){
             return location;
@@ -68,6 +91,7 @@ class GoogleMap extends Component {
                 lat={this._getLat(item.location)}
                 lng={this._getLng(item.location)}
                 style={this._getStyle(item.tag_string)}
+                id={item.id}
             />
         ));
 
