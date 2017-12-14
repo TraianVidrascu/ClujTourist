@@ -83,7 +83,7 @@ class GoogleMap extends Component {
         }
     }
     render() {
-
+        const K_SIZE = 40;
 
         const objectives = this.state.items.map((item, index) => (
             <MapDisplayObject
@@ -102,6 +102,7 @@ class GoogleMap extends Component {
         } else
             return (
                 <GoogleMapReact
+                    hoverDistance={K_SIZE / 2}
                     defaultCenter={this.props.center}
                     defaultZoom={this.props.zoom}
                     style={{height: '300px'}}
