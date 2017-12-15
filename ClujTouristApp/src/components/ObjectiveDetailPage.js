@@ -41,9 +41,9 @@ export default class ObjectiveDP extends React.Component {
                     item.note,
                     profile_image:
                     item.profile_image,
-                    start_date:
+                    start:
                     item.start_date,
-                    end_date:
+                    end:
                     item.end_date,
                     image:
                     item.profile_image
@@ -56,8 +56,8 @@ export default class ObjectiveDP extends React.Component {
         var temp = date.split('-');
         var year = temp[0];
         var month = temp[1];
-        var day = temp[2];
-        var time = ''//temp[2].split('T')[1]; temp[2] undefined
+        var day = String(temp[2]).split('T')[0]; 
+        var time = String(temp[2]).split('T')[1]; 
         return day + '/' + month + '/' + year + ' ' + time;
     }
 
