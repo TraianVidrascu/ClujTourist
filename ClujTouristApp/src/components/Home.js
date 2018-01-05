@@ -1,7 +1,5 @@
 import React, {Component} from 'react'
-import Img from 'react-img'
 import {Link} from "react-router-dom";
-import ServiceObjective from './objectives/ServiceObjective';
 import '../assets/css/main.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'jquery'

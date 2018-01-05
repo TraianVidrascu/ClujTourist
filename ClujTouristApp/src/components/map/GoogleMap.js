@@ -11,18 +11,18 @@ class GoogleMap extends Component {
         super(props);
         this.state = {
             isLoading: true,
-            items: []
-        }
+            items: [],
+        };
         this._getLat = this._getLat.bind(this);
         this._getLng = this._getLng.bind(this);
         this._getStyle = this._getStyle.bind(this);
     }
 
     componentDidMount() {
-        const itemsRef = firebase.database().ref('items')
+        const itemsRef = firebase.database().ref('items');
 
         itemsRef.on('value', (snapshot) => {
-            const items = snapshot.val()
+            const items = snapshot.val();
             this.setState({
                 items: Object.keys(items).map(id => ({id, ...items[id]}))
             })
@@ -58,9 +58,9 @@ class GoogleMap extends Component {
             fontSize: 16,
             fontWeight: 'bold',
             padding: 4,
-        }
-        const location = {
+        };
 
+        const location = {
             position: 'absolute',
             width: K_WIDTH,
             height: K_HEIGHT,
@@ -75,7 +75,7 @@ class GoogleMap extends Component {
             fontSize: 16,
             fontWeight: 'bold',
             padding: 4,
-        }
+        };
         if(tag_string.indexOf('location')>=0){
             return location;
         }else{
@@ -92,6 +92,7 @@ class GoogleMap extends Component {
                 lng={this._getLng(item.location)}
                 style={this._getStyle(item.tag_string)}
                 id={item.id}
+                key={index}
             />
         ));
 
