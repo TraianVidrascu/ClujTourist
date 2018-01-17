@@ -3,6 +3,7 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 import AddRemoveImages from "../images/AddRemoveImages";
 import ServiceObjective from './ServiceObjective';
 import firebase from '../../config/constants';
+import FileUploader from 'react-firebase-file-uploader';
 
 export default class EditObjective extends Component {
     constructor(props) {
@@ -21,6 +22,8 @@ export default class EditObjective extends Component {
             profile_image: '',// web link catre imagine
             start_date: '',
             end_date: '',
+            isUploading: false,
+            progress: 0,
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -96,6 +99,18 @@ export default class EditObjective extends Component {
 
     }
 
+
+    handleUploadStart = () => this.setState({isUploading: true, progress: 0});
+    handleProgress = (progress) => this.setState({progress});
+    handleUploadError = (error) => {
+      this.setState({isUploading: false});
+      console.error(error);
+    }
+    handleUploadSuccess = (filename) => {
+      this.setState({ progress: 100, isUploading: false});
+      firebase.storage().ref('images').child(filename).getDownloadURL().then(url => this.setState({profile_image: url}));
+    };
+
     render() {
         return (<div className="row">
             <NotificationContainer className="alert alert-success"/>
@@ -109,8 +124,23 @@ export default class EditObjective extends Component {
                 </div>
                 <div className="form-group">
                     <label>Image</label>
-                    <input type="text" className="form-control" name="profile_image" placeholder="Profile Image"
-                           onChange={this.handleChange} value={this.state.profile_image}/>
+                    <img src={this.state.profile_image} height="300px" width="300px"/>
+                    <div>
+                    <form>
+                    {this.state.isUploading &&
+                      <p>Progress: {this.state.progress}</p>
+                    }
+                    <FileUploader
+                      accept="image/*"
+                      name="profile_image"
+                      randomizeFilename
+                      storageRef={firebase.storage().ref('images')}
+                      onUploadStart={this.handleUploadStart}
+                      onUploadError={this.handleUploadError}
+                      onUploadSuccess={this.handleUploadSuccess}
+                      onProgress={this.handleProgress}/>
+                      </form>
+                      </div>
                 </div>
                 <div className="form-group">
                     <label>Description</label>
