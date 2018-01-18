@@ -6,17 +6,34 @@
     "bootstrap": "^3.3.7",
     "firebase": "^4.6.1",
     "google-map-react": "^0.25.0",
+<<<<<<< HEAD
     "jquery": "^3.2.1",
+=======
+>>>>>>> develop
     "node-sass-chokidar": "0.0.3",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+<<<<<<< HEAD
     "react-dropzone-component": "^3.0.0",
     "react-dropzone-es6": "^1.0.2",
     "react-firebase-file-uploader": "^2.4.1",
     "react-google-map": "^3.1.0",
     "react-google-maps-loader": "^4.1.0",
     "react-notifications": "^1.4.3",
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+    "react-dropzone-component": "^3.0.0",
+>>>>>>> + added dependencies to package.json
+    "react-dropzone-es6": "^1.0.2",
+    "react-google-map": "^3.1.0",
+    "react-google-maps-loader": "^4.1.0",
+    "react-notifications": "^1.4.3",
+>>>>>>> crud events
+>>>>>>> develop
     "react-router-dom": "^4.1.1"
   },
   "scripts": {

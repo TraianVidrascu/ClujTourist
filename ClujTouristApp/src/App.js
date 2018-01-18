@@ -3,18 +3,28 @@ import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.css'
 import './assets/css/main.css'
+<<<<<<< HEAD
 import 'react-notifications/lib/notifications.css'
+=======
+>>>>>>> develop
 import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
 import Login from './components/Login'
 import Register from './components/Register'
 import Home from './components/Home'
+<<<<<<< HEAD
 import Add from './components/objectives/Add'
+=======
+import Add from './components/Add'
+>>>>>>> develop
 import Dashboard from './components/protected/Dashboard'
 import Map from './components/Map'
 import { logout } from './helpers/auth'
 import { firebaseAuth } from './config/constants'
+<<<<<<< HEAD
 import EditObjective from "./components/objectives/EditObjective";
 import ObjectiveDP from "./components/ObjectiveDetailPage";
+=======
+>>>>>>> develop
 
 function PrivateRoute ({component: Component, authed, ...rest}) {
   return (
@@ -126,15 +136,22 @@ export default class App extends Component {
           <div className="container">
             <div className="row">
               <Switch>
+<<<<<<< HEAD
                 {/*<Route path='/' exact component={Home} />*/}
                 <PropsRoute path='/' exact component={Home} authed={this.state.authed} />
+=======
+                <Route path='/' exact component={Home} />
+>>>>>>> develop
                 <PublicRoute authed={this.state.authed} path='/map' exact component={Map} />
                 <PublicRoute authed={this.state.authed} path='/login' component={Login} />
                 <PublicRoute authed={this.state.authed} path='/register' component={Register} />
                 <PublicRoute authed={this.state.authed} path='/add' component={Add} />
                 <PrivateRoute authed={this.state.authed} path='/dashboard' component={Dashboard} />
+<<<<<<< HEAD
                 <PrivateRoute authed={this.state.authed} path='/objectives/:id' component={EditObjective} />
                 <PublicRoute authed={this.state.authed} path='/objective/:id' component={ObjectiveDP} />
+=======
+>>>>>>> develop
                 <Route render={() => <h3>No Match</h3>} />
               </Switch>
             </div>
