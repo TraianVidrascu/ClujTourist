@@ -1,5 +1,8 @@
-import React, { Component } from 'react';
-import firebase from '../config/constants'
+import React, {Component} from 'react';
+import ServiceObjective from './ServiceObjective';
+import firebase from '../../config/constants';
+import {NotificationContainer,NotificationManager} from "react-notifications";
+import FileUploader from 'react-firebase-file-uploader';
 
 export default class Add extends Component {
     constructor() {
@@ -15,13 +18,29 @@ export default class Add extends Component {
             tag_string: '',// utilizat pentru filtrare de exmplu #bar#nightlife#obiective sau #concerct#event
             note: 0, //nota de la 1 la 5, default 0
             profile_image: '',// web link catre imagine
+            profile_image_url:'',
             start_date: '',
             end_date: '',
+            isUploading: false,
+            progress: 0,
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleMenuChange = this.handleMenuChange.bind(this);
+
     }
+
+    handleUploadStart = () => this.setState({isUploading: true, progress: 0});
+    handleProgress = (progress) => this.setState({progress});
+    handleUploadError = (error) => {
+      this.setState({isUploading: false});
+      console.error(error);
+    }
+    handleUploadSuccess = (filename) => {
+      this.setState({profile_image: filename, progress: 100, isUploading: false});
+      firebase.storage().ref('images').child(filename).getDownloadURL().then(url => this.setState({profile_image_url: url}));
+    };
+
 
     handleChange(e) {
         this.setState({
@@ -41,8 +60,9 @@ export default class Add extends Component {
                 address: this.state.address,
                 tag_string: this.state.baseTag + this.state.tag_string,
                 note: this.state.note,
-                profile_image: this.state.profile_image,
+                profile_image: this.state.profile_image_url,
             }
+            NotificationManager.success('Location saved', 'Success');
         }else{
             item = {
                 name: this.state.name,
@@ -51,13 +71,17 @@ export default class Add extends Component {
                 address: this.state.address,
                 tag_string: this.state.baseTag + this.state.tag_string,
                 note: this.state.note,
-                profile_image: this.state.profile_image,
+                profile_image_: this.state.profile_image_url,
                 start_date: this.state.start_date,
                 end_date: this.state.start_date,
             }
+            NotificationManager.success('Event saved', 'Success');
         }
 
         itemsRef.push(item);
+
+
+
         this.setState({
             name: '',
             description: '',
@@ -77,21 +101,26 @@ export default class Add extends Component {
         });
         if (this.state.showButton === true) {
             this.setState({
-                showButtonText: 'Location Menu Add',
-                baseTag: '#event'
+                showButtonText: 'Event Menu Add',
+                baseTag: '#location'
             })
         } else {
             this.setState({
-                showButtonText: 'Event Menu Add',
-                baseTag: '#location'
+                showButtonText: 'Location Menu Add',
+                baseTag: '#event'
             })
         }
         console.log(this.state.showButton)
     }
 
+
+
+
+
     render() {
         return (
             <div className="row">
+                <NotificationContainer className="alert alert-success"/>
                 <h1>Add to database</h1>
                 <button onClick={this.handleMenuChange} className="btn btn-primary">{this.state.showButtonText}</button>
                 <form onSubmit={this.handleSubmit}>
@@ -100,11 +129,29 @@ export default class Add extends Component {
                         <input type="text" className="form-control" name="name" placeholder="Name"
                                onChange={this.handleChange} value={this.state.name}/>
                     </div>
-                    <div className="form-group">
-                        <label>Image</label>
-                        <input type="text" className="form-control" name="profile_image" placeholder="Profile Image"
-                               onChange={this.handleChange} value={this.state.profile_image}/>
-                    </div>
+
+                    <div>
+                    <form>
+                    <label>Image:</label>
+                    {this.state.isUploading &&
+                      <p>Progress: {this.state.progress}</p>
+                    }
+                    {this.state.profile_image_url &&
+                      <img src={this.state.profile_image_url} height="300px" width="300px"/>
+                    }
+                    <FileUploader
+                      accept="image/*"
+                      name="profile_image"
+                      randomizeFilename
+                      storageRef={firebase.storage().ref('images')}
+                      onUploadStart={this.handleUploadStart}
+                      onUploadError={this.handleUploadError}
+                      onUploadSuccess={this.handleUploadSuccess}
+                      onProgress={this.handleProgress}/>
+                      </form>
+                      </div>
+
+
                     <div className="form-group">
                         <label>Description</label>
                         <textarea className="form-control" rows="5" name="description" value={this.state.description}

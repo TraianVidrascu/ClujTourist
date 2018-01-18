@@ -14,6 +14,9 @@ const djsConfig = {
             <div className="dz-details">
                 <div className="dz-filename"><span data-dz-name="true"></span></div>
 <<<<<<< HEAD
+                <img data-dz-thumbnail="true" alt="Unavailable image"/>
+=======
+<<<<<<< HEAD
 <<<<<<< HEAD
                 <img data-dz-thumbnail="true" alt="Unavailable image"/>
 =======
@@ -22,6 +25,7 @@ const djsConfig = {
 =======
                 <img data-dz-thumbnail="true" alt="Unavailable image"/>
 >>>>>>> * disabled view for remove/ edit btn in Home page
+>>>>>>> develop
             </div>
             <div className="dz-progress"><span className="dz-upload" data-dz-uploadprogress="true"></span></div>
             <div className="dz-success-mark"><span>✔</span></div>
@@ -109,4 +113,8 @@ export default class AddRemoveImages extends Component {
 
         )
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> develop
