@@ -56,13 +56,10 @@ export default class ObjectiveDP extends React.Component {
         var temp = date.split('-');
         var year = temp[0];
         var month = temp[1];
-<<<<<<< HEAD
-        var day = String(temp[2]).split('T')[0]; 
-        var time = String(temp[2]).split('T')[1]; 
-=======
+
         var day = String(temp[2]).split('T')[0];
         var time = String(temp[2]).split('T')[1];
->>>>>>> develop
+
         return day + '/' + month + '/' + year + ' ' + time;
     }
 
@@ -122,8 +119,4 @@ var notes = {
 }
 var map = {
     height: '170px'
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> develop

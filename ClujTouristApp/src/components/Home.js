@@ -2,11 +2,6 @@ import React, {Component} from 'react'
 import {Link} from "react-router-dom";
 import '../assets/css/main.css'
 import 'bootstrap/dist/css/bootstrap.css'
-<<<<<<< HEAD
-//import 'jquery'
-=======
-
->>>>>>> develop
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 import firebase from '../config/constants'
