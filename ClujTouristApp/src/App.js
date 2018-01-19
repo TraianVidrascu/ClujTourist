@@ -140,7 +140,7 @@ export default class App extends Component {
                 <PublicRoute authed={this.state.authed} path='/add' component={Add} />
                 <PrivateRoute authed={this.state.authed} path='/dashboard' component={Dashboard} />
                 <PrivateRoute authed={this.state.authed} path='/objectives/:id' component={EditObjective} />
-                <PublicRoute authed={this.state.authed} path='/objective/:id' component={ObjectiveDP} />
+                <PrivateRoute authed={this.state.authed} path='/objective/:id' component={ObjectiveDP} />
 
                 <Route render={() => <h3>No Match</h3>} />
               </Switch>

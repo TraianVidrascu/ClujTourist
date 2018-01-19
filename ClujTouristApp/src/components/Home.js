@@ -118,7 +118,8 @@ export default class Home extends Component {
                                 <div className="col-sm-6 col-md-8">
                                     <h4>{item.name}</h4>
                                     <p>{item.description.slice(0, 95)} ... </p>
-                                    {authed === false ? (
+                                    {authed === false ?
+                                        (
                                         <div className="btn-group">
                                             <Link to={'/objective/' + item.id}>
                                                 <button className="btn btn-primary">
