@@ -38,7 +38,7 @@ function PublicRoute ({component: Component, authed, ...rest}) {
       {...rest}
       render={(props) => authed === false
         ? <Component {...props} />
-        : <Redirect to='/dashboard' />}
+        : <Redirect to='/' />}
     />
   )
 }
@@ -62,7 +62,7 @@ export default class App extends Component {
   state = {
     authed: false,
     loading: true,
-  }
+  };
   componentDidMount () {
     this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
       if (user) {
