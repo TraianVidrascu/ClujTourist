@@ -109,16 +109,16 @@ export default class App extends Component {
                   <Link to="/map" className="navbar-brand">Map</Link>
                 </li>
                 <li>
-                  <Link to="/dashboard" className="navbar-brand">Dashboard</Link>
-                </li>
-                <li>
-                  {this.state.authed
-                    ? <button
-                        style={{border: 'none', background: 'transparent'}}
-                        onClick={() => {
-                          logout()
-                        }}
-                        className="navbar-brand">Logout</button>
+                    {this.state.authed
+                      ? <span>
+                          <Link to="/dashboard" className="navbar-brand">Dashboard</Link>
+                          <button
+                            style={{border: 'none', background: 'transparent'}}
+                            onClick={() => {
+                              logout()
+                            }}
+                            className="navbar-brand">Logout</button>
+                       </span>
                     : <span>
                         <Link to="/login" className="navbar-brand">Login</Link>
                         <Link to="/register" className="navbar-brand">Register</Link>
@@ -133,7 +133,6 @@ export default class App extends Component {
               <Switch>
                 {/*<Route path='/' exact component={Home} />*/}
                 <PropsRoute path='/' exact component={Home} authed={this.state.authed} />
-
                 <PropsRoute authed={this.state.authed} path='/map' exact component={Map} />
                 <PublicRoute authed={this.state.authed} path='/login' component={Login} />
                 <PublicRoute authed={this.state.authed} path='/register' component={Register} />

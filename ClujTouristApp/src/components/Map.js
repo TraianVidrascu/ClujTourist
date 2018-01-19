@@ -1,6 +1,4 @@
-import React, {Component} from 'react'
-import firebase from '../config/constants'
-import {Link} from "react-router-dom";
+import React, {Component} from 'react';
 import GoogleMap from './map/GoogleMap';
 
 export default class Map extends Component {

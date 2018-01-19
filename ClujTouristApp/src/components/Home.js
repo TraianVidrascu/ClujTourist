@@ -102,8 +102,8 @@ export default class Home extends Component {
         )
     }
     renderItems() {
-        const items = this.filterItems()
-        const { authed } = this.props
+        const items = this.filterItems();
+        const { authed } = this.props;
 
         return (
             <div className="row justify-content-md-center">
@@ -124,7 +124,7 @@ export default class Home extends Component {
                                             <Link to={'/objective/' + item.id}>
                                                 <button className="btn btn-primary">
                                                     <span className="glyphicon glyphicon-info-sign" /> Info
-                                                    </button>
+                                                </button>
                                             </Link>
                                         </div>
                                     ) : (
@@ -133,11 +133,11 @@ export default class Home extends Component {
                                                 onClick={() => this.deleteRow(item.id)}>
                                                 <span className="glyphicon glyphicon-remove" />
                                             </button>
-                                            <button className="btn btn-primary">
-                                                <Link to={'/objectives/' + item.id}>
-                                                    <span className="glyphicon glyphicon-edit" />
-                                                </Link>
-                                            </button>
+                                            <Link to={'/objectives/' + item.id}>
+                                                <button className="btn btn-primary">
+                                                        <span className="glyphicon glyphicon-edit" />
+                                                </button>
+                                            </Link>
                                             <Link to={'/objective/' + item.id}>
                                                 <button className="btn btn-primary">
                                                     <span className="glyphicon glyphicon-info-sign" />
