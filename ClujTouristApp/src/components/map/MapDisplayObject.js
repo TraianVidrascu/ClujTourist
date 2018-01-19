@@ -53,6 +53,7 @@ export default class MapDisplayObject extends Component {
 
     styles = {
         text_div_style: {
+            zIndex:999,
             position: 'absolute',
             minWidth: '120px',
             minHeight: '60px',

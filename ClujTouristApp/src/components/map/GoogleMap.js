@@ -41,8 +41,8 @@ class GoogleMap extends Component {
     }
 
     _getStyle(tag_string) {
-        const K_WIDTH = 40;
-        const K_HEIGHT = 40;
+        const K_WIDTH = 35;
+        const K_HEIGHT = 35;
 
         const event = {
             position: 'absolute',
@@ -51,7 +51,7 @@ class GoogleMap extends Component {
             left: -K_WIDTH / 2,
             top: -K_HEIGHT / 2,
 
-            border: '5px solid #f44336',
+            border: '1px solid black',
             borderRadius: K_HEIGHT,
             textAlign: 'center',
             backgroundColor: '#3f51b5',
@@ -67,7 +67,7 @@ class GoogleMap extends Component {
             left: -K_WIDTH / 2,
             top: -K_HEIGHT / 2,
 
-            border: '5px solid #f44336',
+            border: '1px solid black',
             borderRadius: K_HEIGHT,
             backgroundColor: '#FFFF00',
             textAlign: 'center',

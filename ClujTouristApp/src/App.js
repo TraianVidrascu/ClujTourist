@@ -38,17 +38,6 @@ function PublicRoute ({component: Component, authed, ...rest}) {
       {...rest}
       render={(props) => authed === false
         ? <Component {...props} />
-        : <Redirect to='/map' />}
-    />
-  )
-}
-
-function PublicRoute ({component: Component, authed, ...rest}) {
-  return (
-    <Route
-      {...rest}
-      render={(props) => authed === false
-        ? <Component {...props} />
         : <Redirect to='/dashboard' />}
     />
   )
@@ -140,7 +129,6 @@ export default class App extends Component {
                 <PrivateRoute authed={this.state.authed} path='/dashboard' component={Dashboard} />
                 <PrivateRoute authed={this.state.authed} path='/objectives/:id' component={EditObjective} />
                 <PrivateRoute authed={this.state.authed} path='/objective/:id' component={ObjectiveDP} />
-
                 <Route render={() => <h3>No Match</h3>} />
               </Switch>
             </div>
