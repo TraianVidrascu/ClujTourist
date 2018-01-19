@@ -137,9 +137,11 @@ export default class Home extends Component {
                                                     <span className="glyphicon glyphicon-edit" />
                                                 </Link>
                                             </button>
-                                            <button className="btn btn-primary">
-                                                <span className="glyphicon glyphicon-info-sign" />
-                                            </button>
+                                            <Link to={'/objective/' + item.id}>
+                                                <button className="btn btn-primary">
+                                                    <span className="glyphicon glyphicon-info-sign" />
+                                                </button>
+                                            </Link>
                                         </div>
                                     )}
                                 </div>

@@ -134,12 +134,11 @@ export default class App extends Component {
                 {/*<Route path='/' exact component={Home} />*/}
                 <PropsRoute path='/' exact component={Home} authed={this.state.authed} />
 
-                <PublicRoute authed={this.state.authed} path='/map' exact component={Map} />
+                <PropsRoute authed={this.state.authed} path='/map' exact component={Map} />
                 <PublicRoute authed={this.state.authed} path='/login' component={Login} />
                 <PublicRoute authed={this.state.authed} path='/register' component={Register} />
                 <PublicRoute authed={this.state.authed} path='/add' component={Add} />
                 <PrivateRoute authed={this.state.authed} path='/dashboard' component={Dashboard} />
-
                 <PrivateRoute authed={this.state.authed} path='/objectives/:id' component={EditObjective} />
                 <PublicRoute authed={this.state.authed} path='/objective/:id' component={ObjectiveDP} />
 
