@@ -12,6 +12,7 @@ class GoogleMap extends Component {
         this.state = {
             isLoading: true,
             items: [],
+            filter: 'events'
         };
         this._getLat = this._getLat.bind(this);
         this._getLng = this._getLng.bind(this);
@@ -94,19 +95,83 @@ class GoogleMap extends Component {
             return event;
         }
     }
+
+    changeFilter(value) {
+        this.setState({
+            filter: value
+        })
+    }
+
+    renderFilter() {
+        const {filter} = this.state
+
+        return (
+            <div className="btn-group" style={{marginBottom: 20}}>
+                <button
+                    className={'btn btn-default active'}
+                    onClick={() => this.changeFilter('all')}
+                >
+                    All
+                </button>
+                <button
+                    className={'btn btn-default active'}
+                    onClick={() => this.changeFilter('events')}
+                >
+                    Events
+                </button>
+                <button
+                    style={{position: 'absolute', zindex: '999'}}
+                    className={'btn btn-default active'}
+                    onClick={() => this.changeFilter('locations')}
+                >
+                    Locations
+                </button>
+            </div>
+        )
+    }
+
     render() {
         const K_SIZE = 40;
+        let objectives;
 
-        const objectives = this.state.items.map((item, index) => (
-            <MapDisplayObject
+        if (this.state.filter === 'all') {
+            objectives = this.state.items.map((item, index) => (
+              <MapDisplayObject
                 text={item.name}
                 lat={this._getLat(item.location)}
                 lng={this._getLng(item.location)}
                 style={this._getStyle(item.tag_string)}
                 id={item.id}
                 key={index}
-            />
-        ));
+              />
+            ));
+        }
+
+        if (this.state.filter === 'events') {
+            objectives = this.state.items.filter(item => item.start_date).map((item, index) => (
+              <MapDisplayObject
+                text={item.name}
+                lat={this._getLat(item.location)}
+                lng={this._getLng(item.location)}
+                style={this._getStyle(item.tag_string)}
+                id={item.id}
+                key={index}
+              />
+            ));
+        }
+
+        if (this.state.filter === 'locations') {
+            objectives = this.state.items.filter(item => !item.start_date).map((item, index) => (
+              <MapDisplayObject
+                text={item.name}
+                lat={this._getLat(item.location)}
+                lng={this._getLng(item.location)}
+                style={this._getStyle(item.tag_string)}
+                id={item.id}
+                key={index}
+              />
+            ));
+        }
 
         if (this.state.isLoading) {
             return (<div>
@@ -114,18 +179,26 @@ class GoogleMap extends Component {
             </div>)
         } else
             return (
+              <div>
+                <div>
+                  {this.renderFilter()}
+                </div>
+                <div>
                 <GoogleMapReact
                     hoverDistance={K_SIZE / 2}
                     defaultCenter={this.props.center}
                     defaultZoom={this.props.zoom}
-                    style={{height: '300px'}}
+                    style={{height: '300px', height: '20px', width: '20px'}}
                     center={[46.7712101, 23.623635299999933]}
                     zoom={13}
                 >
                     {
                         objectives
                     }
-                </GoogleMapReact>)
+                </GoogleMapReact>
+                </div>
+                </div>
+              );
     }
 }
 
