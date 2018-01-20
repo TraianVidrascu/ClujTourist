@@ -112,18 +112,15 @@ export default class EditObjective extends Component {
     };
 
     render() {
-        return (<div className="row">
+        return (<div className="row login-register objedit">
             <NotificationContainer className="alert alert-success"/>
             <h1>Edit {this.state.name}</h1>
-            <img src={this.state.image} alt="" className="img-rounded img-responsive" />
             <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
-                    <label>Name</label>
                     <input type="text" className="form-control" name="name" placeholder="Name"
                            onChange={this.handleChange} value={this.state.name}/>
                 </div>
                 <div className="form-group">
-                    <label>Image</label>
                     <img src={this.state.profile_image} height="300px" width="300px"/>
                     <div>
                     <form>
@@ -142,12 +139,11 @@ export default class EditObjective extends Component {
                       </form>
                       </div>
                 </div>
-                <div className="form-group">
-                    <label>Description</label>
+                <div className="form-group desc_form">
                     <textarea className="form-control" rows="5" name="description" value={this.state.description}
                               onChange={this.handleChange}/>
                 </div>
-                <div className="form-group">
+                <div className="form-group desc_form">
                     <label>Location</label>
                     <textarea className="form-control" name="location" value={this.state.location}
                               onChange={this.handleChange}/>

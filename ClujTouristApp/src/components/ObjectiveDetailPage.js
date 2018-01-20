@@ -127,23 +127,23 @@ export default class ObjectiveDP extends React.Component {
         else
             return (
                 <div>
-                    <div className="row" style={divStyle}>
+                    <div className="row login-register pdetails" style={divStyle}>
                         <div className="col-sm-2 col-md-2">
                             <img className="img-rounded" alt="" src={this.state.profile_image}/>
                         </div>
-                        <div className="col-sm-8 col-md-6">
-                            <h2>{this.state.name}</h2>
-                            <p>address:{this.state.address}</p>
-                            <p>tag:{this.state.tag_string}</p>
-                            <h4 style={notes}>Note:{this.state.note}</h4>
+                        <div className="col-sm-6 col-md-6">
+                            <h3>{this.state.name}</h3>
+                            <p><span>Address:</span> {this.state.address}</p>
+                            <p><span>Tag:</span> {this.state.tag_string}</p>
+                            <p><span>Note:</span> {this.state.note}</p>
                         </div>
                     </div>
-                    <div class="row" style={divStyle}>
-                        <p>Description:</p>
+                    <div className="row login-register pdetails" style={divStyle}>
+                        <p className="pdtitle">Description:</p>
                         <p>{this.state.description}</p>
                     </div>
                     {this.state.authed != false ? (
-                        <div>
+                        <div className="pbutton">
                             {
                                 !this.state.isToVisit ?
                                     <button type="submit" onClick={this._addToVisit} className="btn btn-primary">Add</button> :
