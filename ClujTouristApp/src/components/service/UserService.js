@@ -53,6 +53,6 @@ export function removeToVisit(uid,oid) {
         })
     });
     //var ref = db.child(uid + "/info/tovisit/"+key);
-    
+
 }
 

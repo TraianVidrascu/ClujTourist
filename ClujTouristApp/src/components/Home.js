@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 import firebase from '../config/constants'
-import {getDatabase, isAdmin} from "./service/UserService";
+import {getDatabase, isAdmin, isToVisit} from "./service/UserService";
 import {getUid} from '../helpers/auth'
 
 
@@ -70,6 +70,7 @@ export default class Home extends Component {
                 if (filter === 'all') return true
                 if (filter === 'events') return item.start_date !== undefined
                 if (filter === 'locations') return item.start_date === undefined
+                if (filter === 'wishlist') return isToVisit(getUid(),item.id)
             })
     }
 
@@ -110,6 +111,12 @@ export default class Home extends Component {
                     onClick={() => this.changeFilter('locations')}
                 >
                     Locations
+                </button>
+                <button
+                    className={'btn btn-default' + (filter === '' ? ' active' : '')}
+                    onClick={() => this.changeFilter('wishlist')}
+                >
+                    Wishlist
                 </button>
             </div>
         )
