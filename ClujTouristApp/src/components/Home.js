@@ -64,7 +64,8 @@ export default class Home extends Component {
             .filter(item => {
                 if (search === '') return true
                 if (search.length < 2) return false
-                return item.name.toLowerCase().includes(search.toLowerCase())
+                return item.name.toLowerCase().includes(search.toLowerCase()) ||
+                    item.tag_string.toLocaleLowerCase().indexOf(search.toLowerCase())>=0
             })
             .filter(item => {
                 if (filter === 'all') return true
