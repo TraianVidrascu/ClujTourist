@@ -5,6 +5,9 @@ import 'bootstrap/dist/css/bootstrap.css'
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 import firebase from '../config/constants'
+import {getDatabase, isAdmin} from "./service/UserService";
+import {getUid} from '../helpers/auth'
+
 
 export default class Home extends Component {
     constructor() {
@@ -13,23 +16,30 @@ export default class Home extends Component {
             items: [],
             search: '',
             filter: 'all',
+            isAdmin: false
         }
     }
+
     componentDidMount() {
+        this.setState({
+            isAdmin: isAdmin(getUid())
+        });
         const itemsRef = firebase.database().ref('items')
 
         itemsRef.on('value', (snapshot) => {
             const items = snapshot.val()
             this.setState({
-                items: Object.keys(items).map(id => ({ id, ...items[id] }))
+                items: Object.keys(items).map(id => ({id, ...items[id]}))
             })
         });
     }
+
     changeSearch(value) {
         this.setState({
             search: value
         })
     }
+
     changeFilter(value) {
         this.setState({
             filter: value
@@ -39,15 +49,16 @@ export default class Home extends Component {
     deleteRow(id) {
         const newItems = this.state.items.filter(item => item.id !== id)
 
-        this.setState({ items: newItems });
+        this.setState({items: newItems});
 
         // stergerea nu se face pe firebase
         firebase.database().ref('items').child(id).remove();
         NotificationManager.success('Deletion completed', 'Success');
 
     }
+
     filterItems() {
-        const { search, filter, items } = this.state
+        const {search, filter, items} = this.state
 
         return items
             .filter(item => {
@@ -61,8 +72,9 @@ export default class Home extends Component {
                 if (filter === 'locations') return item.start_date === undefined
             })
     }
+
     renderSearch() {
-        const { search } = this.state
+        const {search} = this.state
 
         return (
             <input
@@ -70,16 +82,17 @@ export default class Home extends Component {
                 value={search}
                 onChange={e => this.changeSearch(e.target.value)}
                 className="form-control"
-                style={{ marginBottom: 20 }}
+                style={{marginBottom: 20}}
                 placeholder="Search by title..."
             />
         )
     }
+
     renderFilter() {
-        const { filter } = this.state
+        const {filter} = this.state
 
         return (
-            <div className="btn-group" style={{ marginBottom: 20 }}>
+            <div className="btn-group" style={{marginBottom: 20}}>
                 <button
                     className={'btn btn-default' + (filter === 'all' ? ' active' : '')}
                     onClick={() => this.changeFilter('all')}
@@ -101,10 +114,10 @@ export default class Home extends Component {
             </div>
         )
     }
-    renderItems() {
-        const items = this.filterItems();
-        const { authed } = this.props;
 
+    renderItems(isAdmin) {
+        const items = this.filterItems();
+        const {authed} = this.props;
         return (
             <div className="row justify-content-md-center">
                 {items.map(item => (
@@ -113,38 +126,42 @@ export default class Home extends Component {
                         <div className="well well-sm">
                             <div className="row">
                                 <div className="col-sm-6 col-md-4">
-                                    <img src={item.profile_image} alt="" className="img-rounded img-responsive" />
+                                    <img src={item.profile_image} alt="" className="img-rounded img-responsive"/>
                                 </div>
                                 <div className="col-sm-6 col-md-8">
                                     <h4>{item.name}</h4>
                                     <p>{item.description.slice(0, 95)} ... </p>
                                     {authed === false ?
                                         (
-                                        <div className="btn-group">
-                                            <Link to={'/objective/' + item.id}>
-                                                <button className="btn btn-primary">
-                                                    <span className="glyphicon glyphicon-info-sign" /> Info
-                                                </button>
-                                            </Link>
-                                        </div>
-                                    ) : (
-                                        <div className="btn-group admin-buttons">
-                                            <button className="btn btn-primary"
-                                                onClick={() => this.deleteRow(item.id)}>
-                                                <span className="glyphicon glyphicon-remove" />
-                                            </button>
-                                            <Link to={'/objectives/' + item.id}>
-                                                <button className="btn btn-primary">
-                                                        <span className="glyphicon glyphicon-edit" />
-                                                </button>
-                                            </Link>
-                                            <Link to={'/objective/' + item.id}>
-                                                <button className="btn btn-primary">
-                                                    <span className="glyphicon glyphicon-info-sign" />
-                                                </button>
-                                            </Link>
-                                        </div>
-                                    )}
+                                            <div className="btn-group">
+                                                <Link to={'/objective/' + item.id}>
+                                                    <button className="btn btn-primary">
+                                                        <span className="glyphicon glyphicon-info-sign"/> Info
+                                                    </button>
+                                                </Link>
+                                            </div>
+                                        ) : (
+                                            <div className="btn-group admin-buttons">
+                                                {isAdmin ? (
+                                                    <span>
+                                                        <button className="btn btn-primary"
+                                                                onClick={() => this.deleteRow(item.id)}>
+                                                            <span className="glyphicon glyphicon-remove"/>
+                                                        </button>
+                                                        <Link to={'/objectives/' + item.id}>
+                                                            <button className="btn btn-primary">
+                                                                <span className="glyphicon glyphicon-edit"/>
+                                                            </button>
+                                                        </Link>
+                                                    </span>) : null}
+
+                                                <Link to={'/objective/' + item.id}>
+                                                    <button className="btn btn-primary">
+                                                        <span className="glyphicon glyphicon-info-sign"/> Info
+                                                    </button>
+                                                </Link>
+                                            </div>
+                                        )}
                                 </div>
                             </div>
                         </div>
@@ -153,12 +170,13 @@ export default class Home extends Component {
             </div>
         )
     }
+
     render() {
         return (
             <div className="container">
                 {this.renderSearch()}
                 {this.renderFilter()}
-                {this.renderItems()}
+                {this.renderItems(this.state.isAdmin)}
             </div>
         )
     }

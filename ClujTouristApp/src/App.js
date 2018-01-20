@@ -15,11 +15,12 @@ import Add from './components/objectives/Add'
 
 import Dashboard from './components/protected/Dashboard'
 import Map from './components/Map'
-import { logout } from './helpers/auth'
+import {getUid, logout} from './helpers/auth'
 import { firebaseAuth } from './config/constants'
 
 import EditObjective from "./components/objectives/EditObjective";
 import ObjectiveDP from "./components/ObjectiveDetailPage";
+import {isAdmin} from "./components/service/UserService";
 
 function PrivateRoute ({component: Component, authed, ...rest}) {
   return (
@@ -62,18 +63,25 @@ export default class App extends Component {
   state = {
     authed: false,
     loading: true,
+    isAdmin: false
   };
   componentDidMount () {
+      this.setState({
+          isAdmin: isAdmin(getUid())
+      });
+
     this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({
           authed: true,
           loading: false,
+          isAdmin: isAdmin(getUid())
         })
       } else {
         this.setState({
           authed: false,
-          loading: false
+          loading: false,
+            isAdmin: isAdmin(getUid())
         })
       }
     })
@@ -98,9 +106,10 @@ export default class App extends Component {
                   <Link to="/map" className="navbar-brand">Map</Link>
                 </li>
                 <li>
-                    {this.state.authed
-                      ? <span>
-                          <Link to="/dashboard" className="navbar-brand">Dashboard</Link>
+                    {this.state.authed?
+                       <span>
+                    {this.state.isAdmin ?
+                          <Link to="/dashboard" className="navbar-brand">Dashboard</Link>  : null}
                           <button
                             style={{border: 'none', background: 'transparent'}}
                             onClick={() => {
@@ -108,6 +117,7 @@ export default class App extends Component {
                             }}
                             className="navbar-brand">Logout</button>
                        </span>
+
                     : <span>
                         <Link to="/login" className="navbar-brand">Login</Link>
                         <Link to="/register" className="navbar-brand">Register</Link>
