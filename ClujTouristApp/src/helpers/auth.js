@@ -18,7 +18,7 @@ export function resetPassword (email) {
 
 export function getUid () {
     if(!firebaseAuth().currentUser){
-        return null;
+        return false;
     }
     return firebaseAuth().currentUser.uid;
 }

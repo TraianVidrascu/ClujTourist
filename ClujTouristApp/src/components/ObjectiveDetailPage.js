@@ -2,12 +2,15 @@ import React, {Component} from 'react';
 import firebase from '../config/constants';
 import 'bootstrap/dist/css/bootstrap.css';
 import GoogleMap from './map/GoogleMap';
+import {auth, getUid} from "../helpers/auth";
+import {addToVisit, isToVisit, removeToVisit} from "./service/UserService";
 
 export default class ObjectiveDP extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            oid: 0,
             id: 0,
             name: '',
             address: '',
@@ -17,14 +20,24 @@ export default class ObjectiveDP extends React.Component {
             location: '',
             note: 0,
             start: '',
-            end: ''
+            end: '',
+            isToVisit: false,
+            authed: false
         }
+        this._addToVisit = this._addToVisit.bind(this);
+        this._removeToVisit = this._removeToVisit.bind(this);
     }
 
     componentDidMount() {
+        this.setState({
+            authed: getUid()
+        })
+
         firebase.database().ref('items').child(this.props.match.params.id).once('value').then((snapshot) => {
                 let item = snapshot.val();
+            var res = isToVisit(getUid(),snapshot.key);
                 this.setState({
+                    oid: snapshot.key,
                     item: item.id,
                     id: item,
                     name:
@@ -46,10 +59,12 @@ export default class ObjectiveDP extends React.Component {
                     end:
                     item.end_date,
                     image:
-                    item.profile_image
+                    item.profile_image,
+                    isToVisit: res
                 })
             }
         )
+
     }
 
     getdate(date) {
@@ -63,7 +78,22 @@ export default class ObjectiveDP extends React.Component {
         return day + '/' + month + '/' + year + ' ' + time;
     }
 
+    _addToVisit(){
+        addToVisit(this.state.authed,this.state.oid)
+        this.setState({
+            isToVisit: true
+        })
+    }
+
+    _removeToVisit(){
+        removeToVisit(this.state.authed,this.state.oid)
+        this.setState({
+            isToVisit: false
+        })
+    }
+
     render() {
+
         if (this.state.start != undefined)
             return (
                 <div>
@@ -83,6 +113,15 @@ export default class ObjectiveDP extends React.Component {
                         <p>Description:</p>
                         <p>{this.state.description}</p>
                     </div>
+                    {this.state.authed != false ? (
+                        <div>
+                            {
+                                !this.state.isToVisit ?
+                                <button type="submit" onClick={this._addToVisit} className="btn btn-primary">Add</button> :
+                                <button type="submit" onClick={this._removeToVisit} className="btn btn-primary">Remove</button>
+                            }
+                        </div>
+                    ): null}
                 </div>
             );
         else
@@ -103,6 +142,15 @@ export default class ObjectiveDP extends React.Component {
                         <p>Description:</p>
                         <p>{this.state.description}</p>
                     </div>
+                    {this.state.authed != false ? (
+                        <div>
+                            {
+                                !this.state.isToVisit ?
+                                    <button type="submit" onClick={this._addToVisit} className="btn btn-primary">Add</button> :
+                                    <button type="submit" onClick={this._removeToVisit} className="btn btn-primary">Remove</button>
+                            }
+                        </div>
+                    ): null}
                 </div>
             );
     }
