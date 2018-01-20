@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import GoogleMapReact from 'google-map-react';
 import MapDisplayObject from "./MapDisplayObject";
 import firebase from '../../config/constants'
-import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/css/bootstrap.css';
 
 const a = ({text}) => <div>{text}</div>;
 
@@ -45,37 +45,49 @@ class GoogleMap extends Component {
         const K_HEIGHT = 35;
 
         const event = {
+            zIndex: '10',
+            width: '30px',
+            height: '30px',
+            borderRadius: '50% 50% 50% 0',
+            background: '#ff8000',
+            border: '1px solid black',
             position: 'absolute',
+            transform: 'rotate(-45deg)',
+            left: '50%',
+            top: '50%',
+            margin: '-20px 0 0 -20px',
+            animationName: 'bounce',
+            animationFillMode: 'both',
+            animationDuration: '1s',
+
             width: K_WIDTH,
             height: K_HEIGHT,
             left: -K_WIDTH / 2,
             top: -K_HEIGHT / 2,
-
-            border: '1px solid black',
-            borderRadius: K_HEIGHT,
-            textAlign: 'center',
-            backgroundColor: '#3f51b5',
-            fontSize: 16,
-            fontWeight: 'bold',
-            padding: 4,
         };
 
         const location = {
+            zIndex: '0',
+            width: '30px',
+            height: '30px',
+            borderRadius: '50% 50% 50% 0',
+            background: '#3f51b5',
+            border: '1px solid black',
             position: 'absolute',
+            transform: 'rotate(-45deg)',
+            left: '50%',
+            top: '50%',
+            margin: '-20px 0 0 -20px',
+            animationName: 'bounce',
+            animationFillMode: 'both',
+            animationDuration: '1s',
+
             width: K_WIDTH,
             height: K_HEIGHT,
             left: -K_WIDTH / 2,
             top: -K_HEIGHT / 2,
-
-            border: '1px solid black',
-            borderRadius: K_HEIGHT,
-            backgroundColor: '#FFFF00',
-            textAlign: 'center',
-            color: '#3f51b5',
-            fontSize: 16,
-            fontWeight: 'bold',
-            padding: 4,
         };
+
         if(tag_string.indexOf('location')>=0){
             return location;
         }else{
@@ -114,15 +126,12 @@ class GoogleMap extends Component {
                         objectives
                     }
                 </GoogleMapReact>)
-
     }
-
-
 }
 
 GoogleMap.defaultProps = {
     center: {lat: 46.77, lng: 23.62},
-    zoom: 11
+    zoom: 150
 };
 
 export default GoogleMap;
