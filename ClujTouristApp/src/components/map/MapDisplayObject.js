@@ -4,7 +4,6 @@ import '../../assets/css/main.css'
 import {Link} from "react-router-dom";
 
 const DetailsForObjective = React.createClass({
-
     render() {
         return(
             <div  className='objective-content' id='objective-content' style={this.props.styles.text_div_style}>
@@ -41,7 +40,7 @@ export default class MapDisplayObject extends Component {
         this.setState({
             showDetails: 1 - this.state.showDetails,
         });
-        
+
         if (document.getElementById("objective-content")){
             if (this.state.showDetails) {
                 document.getElementById("objective-content").style.display = "block";
@@ -69,7 +68,8 @@ export default class MapDisplayObject extends Component {
             WebkitTransformOrigin: `${this.props.lng}px ${this.props.lat}px`,
             backgroundColor: 'white',
             color: '#3f51b5',
-            border: '5px solid #f44336',
+            border: '1px solid #black',
+            transform: 'rotate(45deg)'
         },
         text_style : {
             padding: '5px',
@@ -95,6 +95,3 @@ export default class MapDisplayObject extends Component {
         );
     }
 }
-
-
-
