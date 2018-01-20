@@ -151,6 +151,7 @@ class GoogleMap extends Component {
                 lng={this._getLng(item.location)}
                 style={this._getStyle(item.tag_string)}
                 id={item.id}
+                image={item.profile_image}
                 key={index}
               />
             ));
@@ -164,6 +165,8 @@ class GoogleMap extends Component {
                 lng={this._getLng(item.location)}
                 style={this._getStyle(item.tag_string)}
                 id={item.id}
+                image={item.profile_image}
+                desc={item.description}
                 key={index}
               />
             ));
@@ -177,6 +180,8 @@ class GoogleMap extends Component {
                 lng={this._getLng(item.location)}
                 style={this._getStyle(item.tag_string)}
                 id={item.id}
+                image={item.profile_image}
+                desc={item.description}
                 key={index}
               />
             ));
@@ -190,6 +195,8 @@ class GoogleMap extends Component {
                     lng={this._getLng(item.location)}
                     style={this._getStyle(item.tag_string)}
                     id={item.id}
+                    image={item.profile_image}
+                    desc={item.description}
                     key={index}
                 />
             ));

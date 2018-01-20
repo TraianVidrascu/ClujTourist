@@ -8,20 +8,24 @@ const DetailsForObjective = React.createClass({
         return(
             <div  className='objective-content' id='objective-content' style={this.props.styles.text_div_style}>
                 <div>
-                    <Link to={'/objective/' + this.props.id}>
-                        <button className="btn btn-primary">
-                            <span className="glyphicon glyphicon-info-sign"/> Info
-                        </button>
-                    </Link>
-
-                    <button type="button" className="btn btn-default btn-sm" onClick={this.props.onClick}>
-                        <span className="glyphicon glyphicon-remove-sign"/>
-                    </button>
-                </div>
-                <div>
-                    <text style={this.props.styles.text_style}>
+                <h6>
                         {this.props.text}
-                    </text>
+                </h6>
+
+                </div>
+                <div className="objc">
+                <img src={this.props.image} alt="" className="img-rounded img-responsive"/>
+                <Link to={'/objective/' + this.props.id}>
+                    <button className="btn btn-default btn-sm">
+                        <span className="glyphicon glyphicon-info-sign"/> Info
+                    </button>
+                </Link>
+
+                <button type="button" className="btn btn-default btn-sm" onClick={this.props.onClick}>
+                    <span className="glyphicon glyphicon-remove-sign"/>
+                </button>
+                <br/><br/><br/>
+                <p>{this.props.desc.substring(0,145)}..</p>
                 </div>
             </div>
         );
@@ -87,7 +91,7 @@ export default class MapDisplayObject extends Component {
             <div>
                 <div  className='my-icon' style={this.props.style} onClick={this.changeHiddenDetailsStatus}>
                     {this.state.showDetails ?
-                        <DetailsForObjective id={this.props.id} text={this.props.text} styles={this.styles} onClick={this.changeHiddenDetailsStatus}/> :
+                        <DetailsForObjective desc={this.props.desc} id={this.props.id} text={this.props.text} image={this.props.image} styles={this.styles} onClick={this.changeHiddenDetailsStatus}/> :
                         null
                     }
                 </div>

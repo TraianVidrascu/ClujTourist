@@ -119,10 +119,10 @@ export default class Add extends Component {
 
     render() {
         return (
-            <div className="row">
+            <div className="row login-register">
                 <NotificationContainer className="alert alert-success"/>
                 <h1>Add to database</h1>
-                <button onClick={this.handleMenuChange} className="btn btn-primary">{this.state.showButtonText}</button>
+                <button onClick={this.handleMenuChange} className="btn btn-primary aadddb">{this.state.showButtonText}</button>
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
                         <label>Name</label>
