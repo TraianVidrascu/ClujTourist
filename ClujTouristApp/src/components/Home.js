@@ -112,12 +112,13 @@ export default class Home extends Component {
                 >
                     Locations
                 </button>
+                {getUid()?
                 <button
                     className={'btn btn-default' + (filter === '' ? ' active' : '')}
                     onClick={() => this.changeFilter('wishlist')}
                 >
                     Wishlist
-                </button>
+                </button>: null}
             </div>
         )
     }

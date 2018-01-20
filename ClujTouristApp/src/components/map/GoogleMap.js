@@ -3,6 +3,8 @@ import GoogleMapReact from 'google-map-react';
 import MapDisplayObject from "./MapDisplayObject";
 import firebase from '../../config/constants'
 import 'bootstrap/dist/css/bootstrap.css';
+import {isToVisit} from "../service/UserService";
+import {getUid} from "../../helpers/auth";
 
 const a = ({text}) => <div>{text}</div>;
 
@@ -120,12 +122,19 @@ class GoogleMap extends Component {
                     Events
                 </button>
                 <button
-                    style={{position: 'absolute', zindex: '999'}}
                     className={'btn btn-default active'}
                     onClick={() => this.changeFilter('locations')}
                 >
                     Locations
                 </button>
+                {getUid()?
+                <button
+                    className={'btn btn-default active'}
+                    onClick={() => this.changeFilter('wishlist')}
+                >
+                    Wishlist
+                </button> : null
+                }
             </div>
         )
     }
@@ -170,6 +179,19 @@ class GoogleMap extends Component {
                 id={item.id}
                 key={index}
               />
+            ));
+        }
+
+        if (this.state.filter === 'wishlist') {
+            objectives = this.state.items.filter(item => isToVisit(getUid(),item.id)).map((item, index) => (
+                <MapDisplayObject
+                    text={item.name}
+                    lat={this._getLat(item.location)}
+                    lng={this._getLng(item.location)}
+                    style={this._getStyle(item.tag_string)}
+                    id={item.id}
+                    key={index}
+                />
             ));
         }
 
