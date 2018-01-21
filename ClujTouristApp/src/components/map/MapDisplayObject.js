@@ -5,27 +5,28 @@ import {Link} from "react-router-dom";
 
 const DetailsForObjective = React.createClass({
     render() {
-        return(
-            <div  className='objective-content' id='objective-content' style={this.props.styles.text_div_style}>
+        return (
+            <div className='objective-content' id='objective-content' style={this.props.styles.text_div_style}>
                 <div>
-                <h6>
+                    <h6>
                         {this.props.text}
-                </h6>
+                    </h6>
 
                 </div>
                 <div className="objc">
-                <img src={this.props.image} alt="" className="img-rounded img-responsive"/>
-                <Link to={'/objective/' + this.props.id}>
-                    <button className="btn btn-default btn-sm">
-                        <span className="glyphicon glyphicon-info-sign"/> Info
-                    </button>
-                </Link>
+                    <img src={this.props.image} alt="" className="img-rounded img-responsive"/>
+                    <Link to={'/objective/' + this.props.id}>
+                        <button className="btn btn-default btn-sm">
+                            <span className="glyphicon glyphicon-info-sign"/> Info
+                        </button>
+                    </Link>
 
-                <button type="button" className="btn btn-default btn-sm" onClick={this.props.onClick}>
-                    <span className="glyphicon glyphicon-remove-sign"/>
-                </button>
-                <br/><br/><br/>
-                <p>{this.props.desc.substring(0,145)}..</p>
+                    <button type="button" className="btn btn-default btn-sm" onClick={this.props.onClick}>
+                        <span className="glyphicon glyphicon-remove-sign"/>
+                    </button>
+                    <br/><br/><br/>
+                    <p>{this.props.desc ?
+                        this.props.desc.substring(0,145): null}..</p>
                 </div>
             </div>
         );
@@ -45,7 +46,7 @@ export default class MapDisplayObject extends Component {
             showDetails: 1 - this.state.showDetails,
         });
 
-        if (document.getElementById("objective-content")){
+        if (document.getElementById("objective-content")) {
             if (this.state.showDetails) {
                 document.getElementById("objective-content").style.display = "block";
             } else {
@@ -56,7 +57,7 @@ export default class MapDisplayObject extends Component {
 
     styles = {
         text_div_style: {
-            zIndex:999,
+            zIndex: 999,
             position: 'absolute',
             minWidth: '120px',
             minHeight: '60px',
@@ -75,7 +76,7 @@ export default class MapDisplayObject extends Component {
             border: '1px solid #black',
             transform: 'rotate(45deg)'
         },
-        text_style : {
+        text_style: {
             padding: '5px',
             width: '100%',
             textAlign: 'center',
@@ -89,9 +90,11 @@ export default class MapDisplayObject extends Component {
     render() {
         return (
             <div>
-                <div  className='my-icon' style={this.props.style} onClick={this.changeHiddenDetailsStatus}>
+                <div className='my-icon' style={this.props.style} onClick={this.changeHiddenDetailsStatus}>
                     {this.state.showDetails ?
-                        <DetailsForObjective desc={this.props.desc} id={this.props.id} text={this.props.text} image={this.props.image} styles={this.styles} onClick={this.changeHiddenDetailsStatus}/> :
+                        <DetailsForObjective desc={this.props.desc} id={this.props.id} text={this.props.text}
+                                             image={this.props.image} styles={this.styles}
+                                             onClick={this.changeHiddenDetailsStatus}/> :
                         null
                     }
                 </div>

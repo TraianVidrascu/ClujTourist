@@ -144,7 +144,7 @@ class GoogleMap extends Component {
         let objectives;
 
         if (this.state.filter === 'all') {
-            objectives = this.state.items.map((item, index) => (
+            objectives = this.state.items.filter(item => item.location).map((item, index) => (
               <MapDisplayObject
                 text={item.name}
                 lat={this._getLat(item.location)}
@@ -158,7 +158,7 @@ class GoogleMap extends Component {
         }
 
         if (this.state.filter === 'events') {
-            objectives = this.state.items.filter(item => item.start_date).map((item, index) => (
+            objectives = this.state.items.filter(item => item.start_date && item.location).map((item, index) => (
               <MapDisplayObject
                 text={item.name}
                 lat={this._getLat(item.location)}
@@ -173,7 +173,7 @@ class GoogleMap extends Component {
         }
 
         if (this.state.filter === 'locations') {
-            objectives = this.state.items.filter(item => !item.start_date).map((item, index) => (
+            objectives = this.state.items.filter(item => !item.start_date && item.location).map((item, index) => (
               <MapDisplayObject
                 text={item.name}
                 lat={this._getLat(item.location)}
